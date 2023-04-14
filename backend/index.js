@@ -16,20 +16,6 @@ const db = mysql.createConnection({
   database: "test",
 });
 
-
-var storage = multer.diskStorage({
-  destination: (req, file, callBack) => {
-      callBack(null, './public/images/')     // './public/images/' directory name where save the file
-  },
-  filename: (req, file, callBack) => {
-      callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
-
-var upload = multer({
-  storage: storage
-});
-
 app.get("/", (req, res) => {
   res.json("hello");
 });
@@ -46,13 +32,14 @@ app.get("/books", (req, res) => {
 });
 
 app.post("/books", (req, res) => {
-  const q = "INSERT INTO books(`title`, `desc`, `price`, `cover`) VALUES (?)";
-
+  const q = "INSERT INTO books(`title`, `desc`, `price`, `cover`, `author`) VALUES (?)";
+  
   const values = [
     req.body.title,
     req.body.desc,
     req.body.price,
     req.body.cover,
+    req.body.author,
   ];
 
   db.query(q, [values], (err, data) => {
@@ -73,13 +60,14 @@ app.delete("/books/:id", (req, res) => {
 
 app.put("/books/:id", (req, res) => {
   const bookId = req.params.id;
-  const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `cover`= ? WHERE id = ?";
+  const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `cover`= ? , `author`= ? WHERE id = ?";
 
   const values = [
     req.body.title,
     req.body.desc,
     req.body.price,
     req.body.cover,
+    req.body.author,
   ];
 
   db.query(q, [...values,bookId], (err, data) => {

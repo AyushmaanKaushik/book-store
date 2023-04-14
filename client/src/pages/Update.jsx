@@ -24,7 +24,7 @@ const Update = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8800/books/${bookId}`, book);
+      await axios.put(`http://localhost:8801/books/${bookId}`, book);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -54,12 +54,12 @@ const Update = () => {
         name="price"
         onChange={handleChange}
       />
-      <input
+      {/* <input
         type="text"
         placeholder="Book cover"
         name="cover"
         onChange={handleChange}
-      />
+      /> */}
       <button onClick={handleClick}>Update</button>
       {error && "Something went wrong!"}
       <Link to="/">See all books</Link>

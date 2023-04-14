@@ -11,7 +11,6 @@ const Add = () => {
     cover: "",
   });
   const [error,setError] = useState(false)
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,6 +37,12 @@ const Add = () => {
         name="title"
         onChange={handleChange}
       />
+      <input
+        type="text"
+        placeholder="Author"
+        name="author"
+        onChange={handleChange}
+      />
       <textarea
         rows={5}
         type="text"
@@ -51,12 +56,12 @@ const Add = () => {
         name="price"
         onChange={handleChange}
       />
-      <input
+      {/* <input
         type="file"
         placeholder="Book cover"
         name="cover"
         onChange={handleChange}
-      />
+      /> */}
       <button onClick={handleClick}>Add</button>
       {error && "Something went wrong!"}
       <Link to="/">See all books</Link>
