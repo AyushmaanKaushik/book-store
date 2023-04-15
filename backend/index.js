@@ -60,13 +60,12 @@ app.delete("/books/:id", (req, res) => {
 
 app.put("/books/:id", (req, res) => {
   const bookId = req.params.id;
-  const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `cover`= ? , `author`= ? WHERE id = ?";
+  const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `author`= ? WHERE id = ?";
 
   const values = [
     req.body.title,
     req.body.desc,
     req.body.price,
-    req.body.cover,
     req.body.author,
   ];
 
