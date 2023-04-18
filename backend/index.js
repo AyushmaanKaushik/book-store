@@ -9,18 +9,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//const db = mysql.createConnection({
-//  host: "localhost",
-//  user: "root",
-//  password: "",
-//  database: "test",
-//});
 const db = mysql.createConnection({
-	host: "book-store.canh3xczde9q.us-west-2.rds.amazonaws.com",
-	  user: "admin",
-	  password: "NiggaWhere123!",
-	  database: "books",
+ host: "localhost",
+ user: "root",
+ password: "",
+ database: "test",
 });
+// const db = mysql.createConnection({
+// 	host: "book-store.canh3xczde9q.us-west-2.rds.amazonaws.com",
+// 	  user: "admin",
+// 	  password: "NiggaWhere123!",
+// 	  database: "books",
+// });
 
 app.get("/", (req, res) => {
   res.json("hello");
