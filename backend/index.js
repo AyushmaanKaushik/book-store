@@ -15,6 +15,12 @@ const db = mysql.createConnection({
 	  password: "NiggaWhere123!",
 	  database: "books",
 });
+// const db = mysql.createConnection({
+// 	host: "book-store.canh3xczde9q.us-west-2.rds.amazonaws.com",
+// 	  user: "admin",
+// 	  password: "NiggaWhere123!",
+// 	  database: "books",
+// });
 
 app.get("/", (req, res) => {
   res.json("hello");
@@ -78,3 +84,4 @@ app.put("/books/:id", (req, res) => {
 app.listen(8801, () => {
   console.log("Connected to backend.");
 });
+
