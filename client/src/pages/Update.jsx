@@ -41,6 +41,12 @@ const Update = () => {
         name="title"
         onChange={handleChange}
       />
+      <input
+        type="text"
+        placeholder="Author"
+        name="author"
+        onChange={handleChange}
+      />
       <textarea
         rows={5}
         type="text"

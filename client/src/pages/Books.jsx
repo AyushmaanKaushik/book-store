@@ -3,10 +3,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import mysql from "mysql";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
 
+const db = mysql.createConnection({
+	host: "localhost",
+	  user: "root",
+	  password: "",
+	  database: "test",
+});
   useEffect(() => {
     const fetchAllBooks = async () => {
       try {
