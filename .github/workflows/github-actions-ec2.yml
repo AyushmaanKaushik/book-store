@@ -113,8 +113,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: ls -a
       - run: cd client
+      - run: ls -a
       - run: npm install
       - run: npm ci
       - run: npm run build
