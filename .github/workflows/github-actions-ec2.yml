@@ -53,10 +53,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: sudo su -
       - run: cd /root/book_store/client
       - run: npm i
       - run: npm start
-
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
         with:
