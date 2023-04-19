@@ -53,8 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: sudo su -
-      - run: cd /root/book_store/client
+        with:
+          persist-credentials: false
       - run: npm i
       - run: npm start
       - name: rsync deployments
