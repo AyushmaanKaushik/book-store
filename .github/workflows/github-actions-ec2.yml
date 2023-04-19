@@ -12,7 +12,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         with:
             remote_host: ${{ secrets.HOST_DNS }}
-            remote_username: ${{ secrets.USERNAME }}
+            remote_user: ${{ secrets.USERNAME }}
             ssh_private_key: ${{ secrets.EC2_SSH_KEY }}
             script_before: |
               cd ${{ secrets.TARGET_DIR }}
