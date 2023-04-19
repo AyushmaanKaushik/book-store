@@ -126,5 +126,5 @@ jobs:
           path: ./*
           remote_path: /root/book-store/client
           remote_host: ${{ secrets.HOST_DNS }}
-          remote_user: ubuntu
+          remote_user: root
           remote_key: "${{ secrets.EC2_SSH_KEY }}"
