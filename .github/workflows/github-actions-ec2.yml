@@ -118,13 +118,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       # - run: cd client && npm run test
-
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.1
-        with:
-          switches: -avzr --delete
-          path: ./*
-          remote_path: /root/book-store/
-          remote_host: ${{ secrets.HOST_DNS }}
-          remote_user: root
-          remote_key: "${{ secrets.EC2_SSH_KEY }}"
+      - run: npm i serve
+      - run: serve -p 3000 -s build/
+      # - name: rsync deployments
+      #   uses: burnett01/rsync-deployments@5.1
+      #   with:
+      #     switches: -avzr --delete
+      #     path: ./*
+      #     remote_path: /root/book-store/
+      #     remote_host: ${{ secrets.HOST_DNS }}
+      #     remote_user: root
+      #     remote_key: "${{ secrets.EC2_SSH_KEY }}"
