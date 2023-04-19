@@ -8,17 +8,36 @@ jobs:
     name: Deploy to EC2
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
+      - uses: actions/checkout@v2
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+      - run: npm i server
+      - run: serve -p 3000 build/
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.1
         with:
-            remote_host: ${{ secrets.HOST_DNS }}
-            remote_user: ${{ secrets.USERNAME }}
-            ssh_private_key: ${{ secrets.EC2_SSH_KEY }}
-            script_before: |
-              cd ${{ secrets.TARGET_DIR }}
-              npm install
-              npm build
-              npm i serve
-              serve -p 3000 build/
+          switches: -avzr --delete
+          path: ./*
+          remote_path: ${{ secrets.TARGET_DIR }}
+          remote_host: ${{ secrets.HOST_DNS }}
+          remote_user: ubuntu
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+
+      # - name: Deploy to Server 1
+      #   uses: easingthemes/ssh-deploy@main
+      #   with:
+      #       remote_host: ${{ secrets.HOST_DNS }}
+      #       remote_user: ${{ secrets.USERNAME }}
+      #       ssh_private_key: ${{ secrets.EC2_SSH_KEY }}
+      #       script_before: |
+      #         cd ${{ secrets.TARGET_DIR }}
+      #         npm install
+      #         npm build
+      #         npm i serve
+      #         serve -p 3000 build/
+
 
       
