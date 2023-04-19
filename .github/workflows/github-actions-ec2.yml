@@ -54,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: npm build
+      - run: npm run build
       - run: npm i server
       - run: serve -p 3000 build/
 
