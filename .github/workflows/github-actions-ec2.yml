@@ -38,10 +38,6 @@
 #           cd ${{ secrets.TARGET_DIR }}
 #           sudo systemctl restart nginx
 
-
-
-
-
 name: Push-to-EC2
 on:
   push:
@@ -53,7 +49,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Executing remote ssh commands using ssh key
-          uses: appleboy/ssh-action@master
+          # uses: appleboy/ssh-action@master
+          uses: actions/checkout@v3
           with:
             host: ${{ secrets.HOST_DNS }}
             username: ${{ secrets.USERNAME }}
@@ -91,6 +88,3 @@ jobs:
       #         npm build
       #         npm i serve
       #         serve -p 3000 build/
-
-
-      
