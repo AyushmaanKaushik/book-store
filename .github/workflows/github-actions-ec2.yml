@@ -1,95 +1,3 @@
-# name: Deploy to EC2
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-      
-#     - name: Install dependencies
-#       run: npm install
-      
-#     - name: Build app
-#       run: npm run build
-      
-#     - name: Upload files to EC2 instance
-#       uses: appleboy/scp-action@master
-#       with:
-#         host: ${{ secrets.EC2_HOST }}
-#         username: ${{ secrets.EC2_USERNAME }}
-#         key: ${{ secrets.EC2_PRIVATE_KEY }}
-#         source: './build/'
-#         target: ${{ secrets.TARGET_DIR }}
-        
-#     - name: SSH into EC2 instance and restart server
-#       uses: appleboy/ssh-action@master
-#       with:
-#         host: ${{ secrets.HOST_DNS }}
-#         username: ${{ secrets.USERNAME }}
-#         key: ${{ secrets.EC2_SSH_KEY }}
-#         script: |
-#           cd ${{ secrets.TARGET_DIR }}
-#           sudo systemctl restart nginx
-
-# name: Push-to-EC2
-# on:
-#   push:
-#     branches:
-#       - master
-# jobs:
-#   build:
-#     name: Deploy to EC2
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Executing remote ssh commands using ssh key
-#           uses: appleboy/ssh-action@master
-#           # uses: actions/checkout@v3
-#           with:
-#             host: ${{ secrets.HOST_DNS }}
-#             username: ${{ secrets.USERNAME }}
-#             key: ${{ secrets.EC2_SSH_KEY }}
-#             script: |
-#               cd /root/book-store/client
-#               npm install
-#               npm run build
-#               npm i serve
-#               serve -p 3000 build/
-      # - uses: actions/checkout@v3
-      #   with:
-      #     persist-credentials: false
-      # - run: npm i
-      # - run: npm start
-      # - name: rsync deployments
-      #   uses: burnett01/rsync-deployments@5.1
-      #   with:
-      #     switches: -avzr --delete
-      #     path: 
-      #     remote_path: ${{ secrets.TARGET_DIR }}
-      #     remote_host: ${{ secrets.HOST_DNS }}
-      #     remote_user: ubuntu
-      #     remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-
-      # - name: Deploy to Server 1
-      #   uses: easingthemes/ssh-deploy@main
-      #   with:
-      #       remote_host: ${{ secrets.HOST_DNS }}
-      #       remote_user: ${{ secrets.USERNAME }}
-      #       ssh_private_key: ${{ secrets.EC2_SSH_KEY }}
-      #       script_before: |
-      #         cd ${{ secrets.TARGET_DIR }}
-      #         npm install
-      #         npm build
-      #         npm i serve
-      #         serve -p 3000 build/
-
-
 name: CI
 
 on:
@@ -116,10 +24,11 @@ jobs:
       - run: ls -a
       - run: npm install
       - run: npm ci
-      - run: npm run build
+      - run: npm start
+      # - run: npm run build
       # - run: cd client && npm run test
-      - run: npm i serve
-      - run: serve -s build
+      # - run: npm i serve
+      # - run: serve -s build
       # - name: rsync deployments
       #   uses: burnett01/rsync-deployments@5.1
       #   with:
