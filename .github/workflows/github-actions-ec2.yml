@@ -113,8 +113,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: pwd
       - run: ls -a
+      - run: cd client
+      - run: npm install
       - run: npm ci
       - run: npm run build
       - run: npm run test
