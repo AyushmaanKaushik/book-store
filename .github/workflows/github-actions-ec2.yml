@@ -52,20 +52,32 @@ jobs:
     name: Deploy to EC2
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-      - run: npm i
-      - run: npm start
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.1
-        with:
-          switches: -avzr --delete
-          path: 
-          remote_path: ${{ secrets.TARGET_DIR }}
-          remote_host: ${{ secrets.HOST_DNS }}
-          remote_user: ubuntu
-          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+      - name: Executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST_DNS }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              cd /root/book-store/client
+              npm install
+              npm run build
+              npm i serve
+              serve -p 3000 build/
+      # - uses: actions/checkout@v3
+      #   with:
+      #     persist-credentials: false
+      # - run: npm i
+      # - run: npm start
+      # - name: rsync deployments
+      #   uses: burnett01/rsync-deployments@5.1
+      #   with:
+      #     switches: -avzr --delete
+      #     path: 
+      #     remote_path: ${{ secrets.TARGET_DIR }}
+      #     remote_host: ${{ secrets.HOST_DNS }}
+      #     remote_user: ubuntu
+      #     remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
 
       # - name: Deploy to Server 1
       #   uses: easingthemes/ssh-deploy@main
