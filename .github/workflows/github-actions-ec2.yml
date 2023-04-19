@@ -54,9 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: npm run build
-      - run: npm i server
-      - run: serve -p 3000 build/
+      - run: npm start
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
