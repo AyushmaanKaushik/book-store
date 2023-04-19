@@ -119,7 +119,7 @@ jobs:
       - run: npm run build
       # - run: cd client && npm run test
       - run: npm i serve
-      - run: serve -p 3000 -s build/
+      - run: serve -s build
       # - name: rsync deployments
       #   uses: burnett01/rsync-deployments@5.1
       #   with:
